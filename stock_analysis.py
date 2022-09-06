@@ -49,7 +49,6 @@ exp_ret = annual_stockdata.mean()
 assets = pd.concat([exp_ret, std_stockdata], axis=1)
 assets.columns = ['Returns', 'STDev']
 
-
 # Instantiate empty lists for portfolio data
 #   Need ORDERED_WEIGHTS because stockdata is in alphabetical order, whereas user input is not necessarily in alph order
 portf_ret = []
@@ -84,9 +83,14 @@ data = {'Returns':portf_ret, 'STDev':portf_std}
 portfolios = pd.DataFrame(data)
 
 # Concatenate the individual stock E[x] and SD to the portfolio E[x] and SD so everything is visible at once
-portfolios.index = ['portfolio1']
+portfolios.index = ['Portfolio']
 portfolio_assets = pd.concat([portfolios, assets])
 
 print(portfolio_assets)
 
-portfolio_assets.plot.scatter(x='STDev', y='Returns', grid=True)
+# Sharpe Ratio calculation
+RISK_FREE = 0.032
+sr = (portfolios['Returns'] - RISK_FREE) / portfolios['STDev']
+print('Sharpe Ratio: ' + str(sr))
+
+# portfolio_assets.plot.scatter(x='STDev', y='Returns', grid=True)
