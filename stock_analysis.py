@@ -26,7 +26,7 @@ for stock in tickers:
 print(portf_dict)
 
 start = date(2014, 1, 1)
-end = date(2021, 12, 31)
+end = date(2022, 9, 8)
 
 stockdata = yf.download(tickers, start, end)['Adj Close']
 
